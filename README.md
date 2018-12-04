@@ -21,18 +21,18 @@ Start time: 11:00
 
 Finish time: 12:18
 
-Actual time needed to complete: 1:18
+Actual time needed to complete: 1:18 **spent extra time creating and subsequently removing some bugs**
 
 
 Feature #3: Handle errors when they occur
 
 Estimate of time needed to complete: 45min
 
-Start time: _____
+Start time: 1:15
 
-Finish time: _____
+Finish time: 1:45
 
-Actual time needed to complete: _____
+Actual time needed to complete: 30
 
 
 https://zubucity.herokuapp.com/
@@ -58,6 +58,7 @@ Location route (/location) request object from client-side AJAX GET request. Res
   formatted_query:
   latitude:
   longitude:
+Returns status 500 and error message if query returns no results.
 Weather route (/weather) requests object from same client-side AJAX GET request. Response is constructed in "weather' object containing:
   <!-- update weather object properties here -->
   Forcast: 
@@ -65,6 +66,8 @@ Weather route (/weather) requests object from same client-side AJAX GET request.
 
 ## Change Log
 12-04-2018 10:53am - Application now has a fully-functional express server, with a GET route for the location resource.
+12-04-2018 12:18pm - Application now has a GET route for the weather resource.
+12-04-2018 1:45pm - Application now has error response for Geocoding response other than "OK".
 
 ## Credits and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
