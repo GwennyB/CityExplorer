@@ -53,7 +53,15 @@ CORS: This application relies on API sources for which CORS provides access mana
 API keys may not be published; load DOTENV and include key vars in .env. 
 Port uses environment variable PORT (default: 3000); set PORT in .env (if using a 3rd-party domain host that sets the port).
 Location route (/location) request object from client-side AJAX GET request. Response is constructed "location" object containing:
-  <!-- add location object properties here -->
+  <!-- update location object properties here -->
+  search_query:
+  formatted_query:
+  latitude:
+  longitude:
+Weather route (/weather) requests object from same client-side AJAX GET request. Response is constructed in "weather' object containing:
+  <!-- update weather object properties here -->
+  Forcast: 
+  Time:
 
 ## Change Log
 12-04-2018 10:53am - Application now has a fully-functional express server, with a GET route for the location resource.
