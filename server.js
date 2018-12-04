@@ -25,18 +25,23 @@ app.get('/home', (req,res) => {
 // create location route
 app.get('/location', (req,res) => { // will update with request to GoogleAPI server
   const locationData = searchToLatLong(req.query.data);
-  if (locationData.status !=='OK') {
-    res.status(500).send('Sorry, something went wrong');
-  } else {
+  if (locationData !== 0) {
     res.send(locationData);
+  } else {
+    res.status(500).send('Sorry, something went wrong');
   }
 });
 
 // search DB
 function searchToLatLong(query) {
   const geoData = require('./data/locdata.json');
-  const location = new Location (geoData.results[0]);
-  location.search_query = query;
+  var location;
+  if (geoData.status ==='OK') {
+    location = new Location (geoData.results[0]);
+    location.search_query = query;
+  } else {
+    location = 0;
+  }
   return location;
 }
 
