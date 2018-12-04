@@ -59,19 +59,21 @@ app.get('/weather', (req,res) => { // will update with request to DarkSky API se
 
 
 //search DB
+let weatherArr = [];
 function searchToWeather(query) {
   const weatherData = require('./data/weatherdata.json');
-  const weather = new Weather (weatherData.daily);
-  weather.search_query = query;
-  return weather;
+  for (let i = 0; i < weatherData.daily.length; i++){
+    new Weather (weatherData.daily[i]);
+  }
+  weatherArr.search_query = query;
+  return weatherArr;
 }
 
 //weather object constructor
 function Weather(weatData) {
   this.forcast = weatData.summary;
-  
   this.time = new Date(weatData.data[0].time * 1000);
-
+  weatherArr.push(this)
 }
 
 
