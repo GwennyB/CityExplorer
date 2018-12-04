@@ -25,8 +25,11 @@ app.get('/home', (req,res) => {
 // create location route
 app.get('/location', (req,res) => { // will update with request to GoogleAPI server
   const locationData = searchToLatLong(req.query.data);
-  console.log('locationData',locationData);
-  res.send(locationData);
+  if (locationData.status !=='OK') {
+    res.status(500).send('Sorry, something went wrong');
+  } else {
+    res.send(locationData);
+  }
 });
 
 // search DB
@@ -63,13 +66,11 @@ function searchToWeather(query) {
   return weather;
 }
 
-// //weather object constructor
+// weather object constructor
 function Weather(weatData) {
   this.forcast = weatData.summary;
   this.time = new Date(weatData.data[0].time * 1000).toDateString();
-
 }
-
 
 // open port and report on console
 app.listen(PORT, () => {
