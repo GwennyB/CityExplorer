@@ -4,9 +4,9 @@ Lab 06: Node, npm, Express, and APIs
 
 Feature #1: Obtain latitude and longitude
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 45min
 
-Start time: _____
+Start time: 9:30am
 
 Finish time: _____
 
@@ -15,7 +15,7 @@ Actual time needed to complete: _____
 
 Feature #2: Retrieve weather information
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 45min
 
 Start time: _____
 
@@ -26,7 +26,7 @@ Actual time needed to complete: _____
 
 Feature #3: Handle errors when they occur
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 45min
 
 Start time: _____
 
