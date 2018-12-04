@@ -9,7 +9,7 @@ require('dotenv').config();
 // require('API_URL').config();
 
 // application constants
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(cors());
@@ -17,7 +17,7 @@ app.use(cors());
 // establish static directory
 app.use(express.static('./public'));
 
-// create test route
+// create home route
 app.get('/home', (req,res) => {
   res.sendFile(`${__dirname}/public/index.html`);
 });
@@ -32,11 +32,6 @@ app.get('/location', (req,res) => { // will update with request to GoogleAPI ser
 // search DB
 function searchToLatLong(query) {
   const geoData = require('./data/locdata.json');
-  // const addressCompTypes = ['locality'];
-  // geoData.values.forEach(element => {
-
-  // })
-  // figure out which index in data array matches the search
   const location = new Location (geoData.results[0]);
   location.search_query = query;
   return location;
@@ -59,21 +54,20 @@ app.get('/weather', (req,res) => { // will update with request to DarkSky API se
 
 
 //search DB
-let weatherArr = [];
 function searchToWeather(query) {
   const weatherData = require('./data/weatherdata.json');
-  for (let i = 0; i < weatherData.daily.length; i++){
-    new Weather (weatherData.daily[i]);
-  }
-  weatherArr.search_query = query;
-  return weatherArr;
+  const weatherArr = [];
+  let weather = new Weather (weatherData.daily);
+  weather.search_query = query;
+  weatherArr.push(weather);
+  return weather;
 }
 
-//weather object constructor
+// //weather object constructor
 function Weather(weatData) {
   this.forcast = weatData.summary;
-  this.time = new Date(weatData.data[0].time * 1000);
-  weatherArr.push(this)
+  this.time = new Date(weatData.data[0].time * 1000).toDateString();
+
 }
 
 
