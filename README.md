@@ -17,11 +17,11 @@ Feature #2: Retrieve weather information
 
 Estimate of time needed to complete: 45min
 
-Start time: _____
+Start time: 11:00
 
-Finish time: _____
+Finish time: 12:18
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1:18
 
 
 Feature #3: Handle errors when they occur
