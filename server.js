@@ -49,6 +49,32 @@ function Location(data) {
   this.longitude = data.geometry.location.lng
 }
 
+
+//create weather route
+app.get('/weather', (req,res) => { // will update with request to DarkSky API server
+  const weatherData = searchToWeather(req.query.data);
+  console.log('weatherData',weatherData);
+  res.send(weatherData);
+});
+
+
+//search DB
+function searchToWeather(query) {
+  const weatherData = require('./data/weatherdata.json');
+  const weather = new Weather (weatherData.daily);
+  weather.search_query = query;
+  return weather;
+}
+
+//weather object constructor
+function Weather(weatData) {
+  this.forcast = weatData.summary;
+  
+  this.time = new Date(weatData.data[0].time * 1000);
+
+}
+
+
 // open port and report on console
 app.listen(PORT, () => {
   console.log(`port ${PORT} open`);
