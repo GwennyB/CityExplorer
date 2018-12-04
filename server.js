@@ -18,8 +18,8 @@ app.use(cors());
 app.use(express.static('./public'));
 
 // create test route
-app.get('/test', (req,res) => {
-  res.status(200).send('msg from the server');
+app.get('/home', (req,res) => {
+  res.sendFile(`${__dirname}/public/index.html`);
 });
 
 // create location route
