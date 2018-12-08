@@ -4,44 +4,47 @@
 const express = require('express');
 const cors = require('cors');
 
-// get project environment variables
-require('dotenv').config();
-// require('API_URL').config();
-
 // application constants
+require('dotenv').config();
 const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 app.use(cors());
 
-// establish static directory
-app.use(express.static('./public'));
+// // establish static directory
+// app.use(express.static('./public'));
 
-// create home route
-app.get('/home', (req,res) => {
-  res.sendFile(`${__dirname}/public/index.html`);
-});
+// // create home route
+// app.get('/home', (req,res) => {
+//   res.sendFile(`${__dirname}/public/index.html`);
+// });
 
 // create location route
 app.get('/location', (req,res) => { // will update with request to GoogleAPI server
   const locationData = searchToLatLong(req.query.data);
-  if (locationData !== 0) {
+  if (!locationData.status) {
     res.send(locationData);
   } else {
     res.status(500).send('Sorry, something went wrong');
+    console.log('error response', res.statusMessage);
   }
 });
 
 // search DB
 function searchToLatLong(query) {
   const geoData = require('./data/locdata.json');
-  var location;
+  let location = {};
   if (geoData.status ==='OK') {
     location = new Location (geoData.results[0]);
     location.search_query = query;
   } else {
-    location = 0;
+    location = {
+      status: 500,
+      responseText: "Sorry, something went wrong"
+    };
   }
+  console.log('location',location);
   return location;
 }
 
@@ -68,12 +71,12 @@ function searchToWeather(query) {
   let weather = new Weather (weatherData.daily);
   weather.search_query = query;
   weatherArr.push(weather);
-  return weather;
+  return weatherArr;
 }
 
 // weather object constructor
 function Weather(weatData) {
-  this.forcast = weatData.summary;
+  this.forecast = weatData.summary;
   this.time = new Date(weatData.data[0].time * 1000).toDateString();
 }
 
